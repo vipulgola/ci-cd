@@ -7,9 +7,10 @@ pipeline {
                 sh 'sudo docker run  --rm --name my-maven-project -v "$(pwd)":/usr/src/mymaven -w /usr/src/mymaven maven:3.3-jdk-8 mvn clean install' 
             }
         }
-        stage('Check'){
+        stage('Build Image & push to docker hub'){
             steps {
-                sh 'ls ./target/'
+                sh 'sudo docker build . -t="m_webserver"'
+		sh 'sudo docker push m_webserver:latest'
             }
         }
         stage('Deploy') {

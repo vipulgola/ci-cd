@@ -14,9 +14,10 @@ pipeline {
 		sh 'sudo docker push akash7778/m_webserver:latest'
             }
         }
-        stage('Deploy') {
+        stage('Deploy to Kubernetes') {
             steps {
-                sh 'echo "deploy"'
+		sh 'sudo runuser -l akash -c "kubectl create deployment --image=akash7778/m_webserver webserver-app"'
+                sh 'sudo runuser -l akash -c "kubectl expose deployment webserver-app --port=8080 --type=NodePort --name=webserver"'
             }
         }
     }

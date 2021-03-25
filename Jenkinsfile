@@ -10,7 +10,8 @@ pipeline {
         stage('Build Image & push to docker hub'){
             steps {
                 sh 'sudo docker build . -t="m_webserver"'
-		sh 'sudo docker push m_webserver:latest'
+		sh 'sudo docker tag m_webserver akash7778/m_webserver'
+		sh 'sudo docker push akash7778/m_webserver:latest'
             }
         }
         stage('Deploy') {

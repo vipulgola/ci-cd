@@ -1,14 +1,14 @@
 pipeline{
     agent any
     stages{
-        stage('Build'){
+        stage('Clean stage'){
             steps{
-                echo 'Build Stage'
+                mvn clean
             }
         }
-        stage('clean stage'){
+        stage('Build stage'){
             steps{
-                echo 'Clean stage'
+                mvn install
             }
         }
         stage('package'){
